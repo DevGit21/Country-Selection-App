@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  height: 100vmin;
   background-color: #282c34;
 }
 
@@ -16,35 +15,42 @@
 }
 
 .App-header {
-  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  padding: 2vmin 1rem;
+  padding: 3vmin 1rem;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-.Utopia-title{
+.Utopia-title {
   color: #fff;
   font-size: calc(10px + 2vmin);
   font-weight: bold;
   min-height: 12vh;
 }
 
-.content{
+.continent-name {
+  padding: 3vh 0;
+  overflow-x: auto;
+  min-width: 53vh;
+}
+.content {
   display: inline-block;
 }
-.continent-name{
-  padding: 5vh 0;
+
+@media only screen and (max-width: 600px) {
+  .content {
+    display: block;
+  }
 }
 
-.continent-name a{
+.continent-name a {
   padding: 2vmin 2rem;
   font-size: calc(11px + 2vmin);
   color: #fff;
@@ -52,14 +58,13 @@
   border: 1px solid #fff;
 }
 
-.country-list{
+.country-list {
   color: #fff;
   overflow: auto;
   max-height: 55vh;
-
 }
 
-.country-list a{
+.country-list a {
   padding: 2vmin 2rem;
   font-size: calc(8px + 2vmin);
   color: #fff;
@@ -68,13 +73,17 @@
   border-top: 1px solid #fff;
 }
 
-a:hover{
-  text-shadow: 0 0 .01px #e3127e;
+.country-list a:last-child {
+  border-bottom: 1px solid #fff;
+}
+
+a:hover {
+  text-shadow: 0 0 0.01px #e3127e;
   color: #e3127e;
 }
 
 a.active {
-  text-shadow: 0 0 .01px #e3127e;
+  text-shadow: 0 0 0.01px #e3127e;
   color: #e3127e;
   background-color: #fff;
 }

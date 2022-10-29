@@ -4,8 +4,8 @@ import './App.css';
 
 function App() {
   const [jsonData, setData] = useState([]);
-  const [contientList, setContinentData] = useState([]);
-  const [contryList, setContryData] = useState([]);
+  const [continentList, setContinentData] = useState([]);
+  const [countryList, setcountryData] = useState([]);
   const componentRef = useRef(null);
   //const [clicked, setClicked] = useState(false);
   const fetchData = () => {
@@ -14,10 +14,10 @@ function App() {
       .then((actualData) => {
         setData(actualData);
         const key = 'continent';
-        const arrayOfContients = [...new Map(actualData.map(item =>
+        const arrayOfcontinents = [...new Map(actualData.map(item =>
           [item[key], item])).values()];
   
-        setContinentData(arrayOfContients);
+        setContinentData(arrayOfcontinents);
       })
       .catch((err) => {
         console.log(err.message);
@@ -28,7 +28,7 @@ function App() {
     fetchData();
   }, []);
 
-  const onSerializeData = (contient,e) => {
+  const onSerializeData = (continent,e) => {
     Array.from(e.target.parentElement.children).forEach(function(item,i) {
       item.className = "";
     });
@@ -36,9 +36,9 @@ function App() {
     
 
     const filtered = jsonData.filter(data => {
-      return data.continent === contient;
+      return data.continent === continent;
     });
-    setContryData(filtered);
+    setcountryData(filtered);
 
     componentRef.current.scrollTo(0, 0);
     
@@ -58,7 +58,7 @@ function App() {
       </header>
       <div className="content">
         <div className="continent-name">
-          {contientList.map(value => {
+          {continentList.map(value => {
             return (
               <a key={value.continent} onClick={(e) => onSerializeData(value.continent,e)}>
                 {value.continent}
@@ -67,7 +67,7 @@ function App() {
           })}
         </div>
         <div className="country-list" ref={componentRef}>
-          {contryList.map(country => {
+          {countryList.map(country => {
             return (
                 <a key={country.alpha2Code} onClick={ (e) => setClicked(e) }>{country.name}</a>
               
