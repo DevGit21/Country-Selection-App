@@ -6,47 +6,44 @@ function App() {
   const [jsonData, setData] = useState([]);
   const [continentList, setContinentData] = useState([]);
   const [countryList, setcountryData] = useState([]);
-  const componentRef = useRef(null);
-  //const [clicked, setClicked] = useState(false);
+  const componentRef = useRef(null); // for get div element
   const fetchData = () => {
     fetch(`https://api.countries.code-test.utopiamusic.com/all`)
       .then((response) => response.json())
       .then((actualData) => {
         setData(actualData);
+        // get all continents
         const key = 'continent';
         const arrayOfcontinents = [...new Map(actualData.map(item =>
-          [item[key], item])).values()];
-  
-        setContinentData(arrayOfcontinents);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+          [item[key], item])).values()];  
+          setContinentData(arrayOfcontinents);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const onSerializeData = (continent,e) => {
+  const showContryList = (continent,e) => {
     Array.from(e.target.parentElement.children).forEach(function(item,i) {
-      item.className = "";
+      item.className = ""; //remove active class from othere element
     });
-    e.target.classList.add('active'); 
-    
+    e.target.classList.add('active');     
 
+    //get country list by continent
     const filtered = jsonData.filter(data => {
       return data.continent === continent;
     });
     setcountryData(filtered);
-
-    componentRef.current.scrollTo(0, 0);
-    
+    componentRef.current.scrollTo(0, 0);    
   };
 
-  const setClicked = (e) => {    
+  const highlightCountry = (e) => {    
     Array.from(e.target.parentElement.children).forEach(function(item,i) {
-      item.className = "";
+      item.className = ""; //remove active class from othere element
     });
     e.target.classList.add('active');    
   };
@@ -60,7 +57,7 @@ function App() {
         <div className="continent-name">
           {continentList.map(value => {
             return (
-              <a key={value.continent} onClick={(e) => onSerializeData(value.continent,e)}>
+              <a key={value.continent} onClick={(e) => showContryList(value.continent,e)}>
                 {value.continent}
               </a>
             );
@@ -69,8 +66,7 @@ function App() {
         <div className="country-list" ref={componentRef}>
           {countryList.map(country => {
             return (
-                <a key={country.alpha2Code} onClick={ (e) => setClicked(e) }>{country.name}</a>
-              
+                <a key={country.alpha2Code} onClick={ (e) => highlightCountry(e) }>{country.name}</a>              
             );
           })}
         </div>
