@@ -52,9 +52,9 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="Utopia-logo" alt="logo" />
-      </header>
+      </header> */}
       <div className="content">
         <div className="continent-name">
           {continentList.map(value => {
