@@ -1,12 +1,12 @@
-import { useEffect, useState,useRef  } from "react";
+import * as React from 'react';
 import logo from './images/logo.png';
 import './App.css';
 
 function App() {
-  const [jsonData, setData] = useState([]);
-  const [continentList, setContinentData] = useState([]);
-  const [countryList, setcountryData] = useState([]);
-  const componentRef = useRef(null); // for get div element
+  const [jsonData, setData] = React.useState([]);
+  const [continentList, setContinentData] = React.useState([]);
+  const [countryList, setcountryData] = React.useState([]);
+  const componentRef = React.useRef(null); // for get div element
   const fetchData = () => {
     fetch(`https://api.countries.code-test.utopiamusic.com/all`)
       .then((response) => response.json())
@@ -23,7 +23,7 @@ function App() {
         });
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchData();
   }, []);
 
@@ -48,6 +48,8 @@ function App() {
     e.target.classList.add('active');    
   };
 
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -63,6 +65,7 @@ function App() {
             );
           })}
         </div>
+        
         <div className="country-list" ref={componentRef}>
           {countryList.map(country => {
             return (
